@@ -33,7 +33,13 @@
 *   `02-keys-configured`
 *   `03-ssh-hardened`
 *   `04-lab5-complete` (текущий)
+## 8. Веб-сервер
+*   **Устанавливаемый пакет:** nginx
+*   **Путь к конфигурации ресурса:** /etc/nginx/sites-available/devops-site
+*   **Каталог ресурса:** /var/www/devops-site (владелец devops:devops, права 755 для каталогов, 644 для файлов)
+*   **Пути к сертификату и ключу:** /etc/ssl/certs/devops.crt (права 644) и /etc/ssl/private/devops.key (владелец root, права 600)
+*   **Команда формирования сертификата:** `sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/devops.key -out /etc/ssl/certs/devops.crt -subj "/CN=devops.local" -addext "subjectAltName=DNS:devops.local"` (срок действия 365 дней)
 
-## 8. Локальное доменное имя
+## 9. Локальное доменное имя
 *   В `/etc/hosts` на Mac добавлена запись: `192.168.64.3 devops.local`.
 *   FQDN сервера: `devops-vm.devops.local` (задано через `hostnamectl`).
