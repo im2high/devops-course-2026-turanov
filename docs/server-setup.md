@@ -33,6 +33,7 @@
 *   `02-keys-configured`
 *   `03-ssh-hardened`
 *   `04-lab5-complete` (текущий)
+
 ## 8. Веб-сервер
 *   **Устанавливаемый пакет:** nginx
 *   **Путь к конфигурации ресурса:** /etc/nginx/sites-available/devops-site
@@ -43,3 +44,12 @@
 ## 9. Локальное доменное имя
 *   В `/etc/hosts` на Mac добавлена запись: `192.168.64.3 devops.local`.
 *   FQDN сервера: `devops-vm.devops.local` (задано через `hostnamectl`).
+
+## 10. Контейнеризация
+*   **Способ установки Docker Engine:** Официальный репозиторий Docker (версия 27.x).
+*   **Участники группы docker:** devops.
+*   **Расположение проекта на сервере:** ~/app
+*   **Расположение файла .env и его права:** ~/app/.env (права 600).
+*   **Публикуемые порты и адреса:** 127.0.0.1:5000 (только для Nginx).
+*   **Именованные тома:** app_db_data (для PostgreSQL).
+*   **Конфигурация обратного прокси:** location /app/ в /etc/nginx/sites-available/devops-site (proxy_pass на http://127.0.0.1:5000/).
