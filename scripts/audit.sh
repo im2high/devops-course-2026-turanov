@@ -16,13 +16,12 @@ check() {
 echo "Аудит конфигурации: $(hostname -f), $(date '+%Y-%m-%d %H:%M')"
 
 echo "[1] Служба SSH"
-check "Вход от имени root запрещён" "no" "$(sudo sshd -T | awk '/^permitrootlogin/{print $2}')"
-check "Парольная аутентификация отключена" "no" "$(sudo sshd -T | awk '/^passwordauthentication/{print $2}')"
-# TODO 1: проверьте, что значение параметра port отлично от 22
-check "Порт SSH не 22" "2222" "$(sudo sshd -T | awk '/^port/{print $2}')"
-# TODO 2: проверьте, что значение параметра maxauthtries равно 3
-check "MaxAuthTries равно 3" "3" "$(sudo sshd -T | awk '/^maxauthtries/{print $2}')"
-
+check "Вход от имени root запрещён" "no" "$(sudo sshd -T | awk 'tolower($1)=="permitrootlogin"{print $2}')"
+check "Парольная аутентификация отключена" "no" "$(sudo sshd -T | awk 'tolower($1)=="passwordauthentication"{print $2}')"
+# TODO 1
+check "Порт SSH не 22" "2222" "$(sudo sshd -T | awk 'tolower($1)=="port"{print $2}')"
+# TODO 2
+check "MaxAuthTries равно 3" "3" "$(sudo sshd -T | awk 'tolower($1)=="maxauthtries"{print $2}')"
 echo "[2] Межсетевой экран"
 check "Межсетевой экран активен" "active" "$(sudo ufw status | awk '/^Status:/{print $2}')"
 # TODO 3: проверьте, что политика по умолчанию для входящего трафика равна deny
