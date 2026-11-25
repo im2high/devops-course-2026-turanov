@@ -12,8 +12,8 @@
     - name: Assert SSH hardening
       ansible.builtin.assert:
         that:
-          - "'passwordauthentication no' in sshd_effective.stdout_lines"
-          - "'permitrootlogin no' in sshd_effective.stdout_lines"
+          - "'passwordauthentication no' in (sshd_effective.stdout_lines | map('lower') | list)"
+          - "'permitrootlogin no' in (sshd_effective.stdout_lines | map('lower') | list)"
 
     - name: Read container facts
       community.docker.docker_container_info:
