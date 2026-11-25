@@ -1,0 +1,9 @@
+---
+# Verified by CI on a native ARM64 runner, PR #3 of the application repo.
+app_image: "ghcr.io/im2high/devops-ci-app-turanov"
+app_tag: "1e23496d385f58beff5b96e2d69b29400689842a"
+app_container_name: "devops-ci-app"
+app_host_port: 5000
+app_internal_port: 5000
+docker_apt_arch: arm64
+automation_public_key: "{{ lookup('ansible.builtin.env', 'HOME') }}/.ssh/devops_vm.pub"
